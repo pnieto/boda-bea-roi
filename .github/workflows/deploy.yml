@@ -1,8 +1,15 @@
-- name: Copy web folder
-  uses: garygrossgarten/github-action-scp@release
-  with:
-    local: ./
-    remote: /var/www/html
-    host: ${{ secrets.HOSTNAME }}
-    username: ${{ secrets.SSH_USER }}
-    privateKey: ${{ secrets.PRIVATE_KEY }}
+name: Web deploy
+on: push
+jobs:
+  deploy:
+    name: Web deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Copy web folder
+        uses: garygrossgarten/github-action-scp@release
+        with:
+          local: ./
+          remote: /var/www/html
+          host: ${{ secrets.HOSTNAME }}
+          username: ${{ secrets.SSH_USER }}
+          privateKey: ${{ secrets.PRIVATE_KEY }}
